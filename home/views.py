@@ -2,11 +2,18 @@ from django.shortcuts import render
 from .models import *
 
 # Create your views here.
+
 def home(request):
-    return render(request,'index.html')
+    views={}
+    views['feedbacks']=Review.objects.all()
+    # [{'name':'Ram'},{'post':''} and so on...]
+    views['projects']=Review.objects.all()
+    return render(request,'index.html',views) #we are returning views to the index page as well
 
 def about(request):
-    return render(request,'about.html')
+    views={}
+    views['feedbacks']=Review.objects.all()
+    return render(request,'about.html',views)
 
 def bloghome(request):
     return render(request,'blog-home.html')
