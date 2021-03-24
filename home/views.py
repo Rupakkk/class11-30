@@ -7,7 +7,9 @@ def home(request):
     views={}
     views['feedbacks']=Review.objects.all()
     # [{'name':'Ram'},{'post':''} and so on...]
-    views['projects']=Review.objects.all()
+    views['projects']=Project.objects.all()
+    views['brands']=Brand.objects.all()
+    
     return render(request,'index.html',views) #we are returning views to the index page as well
 
 def about(request):
@@ -23,6 +25,7 @@ def blogsingle(request):
 
 def contact(request):
     if request.method=="POST":
+        
         name=request.POST['name']
         email=request.POST['email']
         subject=request.POST['subject']
@@ -34,7 +37,9 @@ def contact(request):
             message=message
         )
         data.save()
-
+        views={}
+        views["message"]={"The form is submitted"}
+        return render(request,'contact.html',views)
     return render(request,'contact.html')
 
 def elements(request):
